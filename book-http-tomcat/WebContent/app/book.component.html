@@ -1,0 +1,57 @@
+<div [hidden]='showMode!="showBooks"'>
+	<h3>도서목록</h3>
+	<ul	*ngFor="let book of books">
+		<li><a (click)='showUpdBook(book.id)'><img src='./assets/image/{{book.img}}' height='80'>{{book.name}}</a>
+	</ul>
+	<br>
+	<button (click)='changeShowMode("showAddBook")'>등록화면</button>
+</div>
+
+<div [hidden]='showMode!="showBook"'>
+	아이디: {{book.id}}<br>
+	도서명: {{book.name}}<br>
+	가격: {{book.price}}<br>
+	날짜: {{book.date}}<br>
+	이미지: {{book.img}}<br>
+
+	<img src='./assets/image/{{book.img}}' height='80'><br><br>
+	
+	<button (click)='changeShowMode("showBooks")'>목록으로</button>
+	<button (click)='changeShowMode("showUpdBook")'>변경화면</button>
+</div>
+
+<div [hidden]='showMode!="showAddBook"'>
+	<form #f='ngForm'>
+		<label style='width:100px; display:inline-block'>아이디:</label>
+		<input type='text' [(ngModel)]='book.id' ngModel #id='ngModel' name='id'><br>
+		<label style='width:100px; display:inline-block'>도서명:</label>
+		<input type='text' [(ngModel)]='book.name' ngModel #name='ngModel' name='name'><br>
+		<label style='width:100px; display:inline-block'>가격:</label>
+		<input type='text' [(ngModel)]='book.price' ngModel #price='ngModel' name='price'><br>
+		<label style='width:100px; display:inline-block'>날짜:</label>
+		<input type='text' [(ngModel)]='book.date' ngModel #date='ngModel' name='date'><br>
+		<label style='width:100px; display:inline-block'>이미지:</label>
+		<input type='text' [(ngModel)]='book.img' ngModel #img='ngModel' name='img'><br>
+		
+		<button (click)='changeShowMode("showBooks")'>취소</button>
+		<button (ngSubmit)='addBook(f)'>등록</button>
+	</form>
+</div>
+
+<div [hidden]='showMode!="showUpdBook"'>
+	<form #f='ngForm'>
+		아이디:{{book.id}}<br>
+		<input type='hidden' [(ngModel)]='book.id' ngModel #id='ngModel' name='id'><br>
+		<label style='width:100px; display:inline-block'>도서명:</label>
+		<input type='text' [(ngModel)]='book.name' ngModel #name='ngModel' name='name'><br>
+		<label style='width:100px; display:inline-block'>가격:</label>
+		<input type='text' [(ngModel)]='book.price' ngModel #price='ngModel' name='price'><br>
+		<label style='width:100px; display:inline-block'>날짜:</label>
+		<input type='text' [(ngModel)]='book.date' ngModel #date='ngModel' name='date'><br>
+		<label style='width:100px; display:inline-block'>이미지:</label>
+		<input type='text' [(ngModel)]='book.img' ngModel #img='ngModel' name='img'><br>
+		
+		<button (click)='changeShowMode("showBooks")'>목록으로</button>
+		<button (ngSubmit)='updBook(f)'>변경</button>
+	</form>
+</div>
